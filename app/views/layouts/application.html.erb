@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Nostalgia</title>
+    <title>Nostalgia - wersja testowa</title>
+    <meta content-Type="application/pdf">
     <%= csrf_meta_tags %>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -34,16 +35,44 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Nostalgia</a>
+          <a class="brand" href="/">Radio Nostalgia</a>
           <div class="container nav-collapse">
-            <ul class="nav">
-                <li><%= link_to "Link1", "/path1"  %></li>
-                <li><%= link_to "Link2", "/path2"  %></li>
-                <li><%= link_to "Link3", "/path3"  %></li>
+	<ul class="nav">
+<% if admin_signed_in? -%> 
+		<li><%= link_to "Komunikaty reklamowe", "/adminkoms"  %></li>
+		<li><%= link_to "Ogłoszenia", "/adminogls"  %></li>     
+<% else -%>     
+                <li><%= link_to "Komunikaty reklamowe", "/koms"  %></li>
+		<li><%= link_to "Ogłoszenia", "/ogls"  %></li>
+<% end -%>
+                <li class="divider-vertical"></li>
+<% if user_signed_in? -%>
+<% else -%>
+                <li><%= link_to "Zarejestruj się", "/users/sign_up"  %></li>
+                <li><%= link_to "Zaloguj się", "/users/sign_in"  %></li>
+<% end -%>	
+            </ul>
+            <ul class="nav pull-right">
+                <% if user_signed_in? -%>
+       
+          <%= current_user.email %> |
+          <%= link_to 'Mój profil', edit_user_registration_path %> |
+          <%= link_to 'Wyloguj', destroy_user_session_path, :method => :delete %>
+        
+      <% end -%>
+      <% if admin_signed_in? -%>
+        
+          <%= current_admin.email %> |
+          <%= link_to 'Panel administratora', admins_path %> |
+	  <%= link_to 'Mój profil', edit_admin_registration_path %> |
+          <%= link_to 'Wyloguj', destroy_admin_session_path, :method => :delete %>
+        
+      <% end -%>
             </ul>
           </div><!--/.nav-collapse -->
+
         </div>
-      </div>
+     </div>
     </div>
 
     <div class="container">
@@ -53,23 +82,40 @@
             <%= yield %>
           </div>
           <div class="span1">&nbsp;</div>
-            <div class="span3">
+<% if admin_signed_in? -%>            
+<div class="span3">
+              <div class="well sidebar-nav">
+                <h3>Menu</h3>
+                <ul class="nav nav-list">
+                  <li class="nav-header">użyj tego menu do szybszej nawigacji</li>
+                    <li><%= link_to "Komunikaty reklamowe", "/adminkoms"  %></li>
+                    <li><%= link_to "Ogłoszenia", "/adminogls"  %></li>
+                    <li><%= link_to "Użytkownicy", "/adminusers"  %></li>
+                    <li><%= link_to "Administratorzy", "/admins"  %></li>
+                </ul>
+              </div>
+            </div>
+<% end -%>
+<% if user_signed_in? -%>
+
+<div class="span3">
               <div class="well sidebar-nav">
                 <h3>Sidebar</h3>
                 <ul class="nav nav-list">
                   <li class="nav-header">Sidebar</li>
-                    <li><%= link_to "Link1", "/path1"  %></li>
-                    <li><%= link_to "Link2", "/path2"  %></li>
+                    <li><%= link_to "Komunikaty reklamowe", "/koms"  %></li>
+                    <li><%= link_to "Ogłoszenia", "/ogls"  %></li>
                     <li><%= link_to "Link3", "/path3"  %></li>
                 </ul>
               </div>
             </div>
+<% end -%>
           </div>
         </div><!--/row-->
       </div><!--/content-->
 
-      <footer>
-        <p>&copy; Company 2012</p>
+      <footer class="container">
+        <p class="help-block">&copy; angelus 2012</p>
       </footer>
 
     </div> <!-- /container -->

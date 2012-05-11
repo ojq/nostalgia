@@ -1,0 +1,19 @@
+<div class="well">
+<h2>Zaloguj się</h2>
+<br />
+<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <div><%= f.label :email %>
+  <%= f.email_field :email %></div>
+
+  <div><%= f.label :password, "Zaloguj się" %>
+  <%= f.password_field :password %></div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div><%= f.check_box :remember_me %> <%= f.label :remember_me, "Zapamiętaj mnie" %></div>
+  <% end -%>
+
+  <div><%= f.submit "Zaloguj się" %></div>
+<% end %>
+
+<%= render "links" %>
+</div>

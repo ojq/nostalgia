@@ -1,0 +1,20 @@
+<div class="well">
+<h2>Zarejestruj</h2>
+
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :email %>
+  <%= f.email_field :email %></div>
+
+  <div><%= f.label :password, "Hasło" %>
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation, "Potwierdź hasło" %>
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.submit "Dalej" %></div>
+<% end %>
+
+<%= render "links" %>
+</div>

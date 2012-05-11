@@ -1,0 +1,27 @@
+<div class="well">
+<h2>Edytuj <%= resource_name.to_s.humanize %></h2>
+
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+ <div><%= f.label :email %>
+  <%= f.email_field :email %></div>
+
+  <div><%= f.label :name, "Imię i nazwisko" %>
+  <%= f.email_field :name %></div>
+
+  <div><%= f.label :password, "Nowe haslo" %>
+  <%= f.password_field :password, :autocomplete => "off" %> <i>(pozostaw puste, jeśli nie chcesz go zmieniać)</i></div>
+
+  <div><%= f.label :password_confirmation, "Potwierdź hasło" %>
+  <%= f.password_field :password_confirmation %></div>
+
+<h3>Aktualne hasło:</h3>
+  <div><%= f.label :current_password, "Aktualne hasło" %> 
+  <%= f.password_field :current_password, :autocomplete => "on" %><i>(potrzebne aby zachować zmiany)</i></div>
+
+  <div><%= f.submit "Aktualizuj" %></div>
+<% end %>
+
+<%= link_to "Back", :back %>
+</div>
