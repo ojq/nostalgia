@@ -1,0 +1,10 @@
+rails new nostalgia
+bundle install
+rails g controller welcome index
+
+#twitter boostrap
+rails g boostrap:install
+rails g bootstrap:layout application fixed
+
+#devise
+rails g devise:install
